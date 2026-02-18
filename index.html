@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pre-Liquidación · Estudio Carracedo</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap');
   :root {
@@ -164,13 +165,31 @@
   .rate-item.hon .rv { color:var(--accent2); }
   .no-clients { text-align:center; color:var(--muted); padding:48px; border:1px dashed var(--border); border-radius:4px; font-size:13px; display:none; }
 
+  /* COBROS EN PREVIEW */
+  .pd-cobros { display:none; margin-top:20px; padding-top:16px; border-top:2px dashed #ccc; }
+  .pd-cobros-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .pd-cobros h4 { font-family:'Syne',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#999; margin-bottom:10px; }
+  .pd-cobros .ci { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #eee; font-size:12px; }
+  .pd-cobros .ci .cl { color:#666; }
+  .pd-cobros .ci .cv { font-weight:600; color:#111; }
+  .pd-cobros .dif { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; border-radius:3px; margin-top:8px; }
+  .pd-cobros .dif .dl { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; }
+  .pd-cobros .dif .dv { font-family:'Syne',sans-serif; font-weight:800; font-size:18px; }
+  .pd-cobros .dif.pos { background:#e8f8ee; border:1px solid #a0d8b0; }
+  .pd-cobros .dif.pos .dl { color:#2a7a4a; }
+  .pd-cobros .dif.pos .dv { color:#1a6a3a; }
+  .pd-cobros .dif.neg { background:#fde8e8; border:1px solid #d8a0a0; }
+  .pd-cobros .dif.neg .dl { color:#7a2a2a; }
+  .pd-cobros .dif.neg .dv { color:#6a1a1a; }
+
   @media (max-width:680px) { .total-section { grid-template-columns:1fr; } .totals-left { border-right:none; border-bottom:1px solid var(--border); } }
   @media print {
-    header,.upload-zone,.actions,.slabel,.client-banner,.loading-bar,.loading-txt,.err-box,.apikey-banner { display:none !important; }
+    header,.upload-zone,.actions,.slabel,.client-banner,.loading-bar,.loading-txt,.err-box,.apikey-banner,.no-print { display:none !important; }
     body { background:#fff; }
     #page-liq { display:block !important; }
     #formSection { display:none !important; }
     .preview-doc { display:block !important; border:none; margin:0; padding:32px; }
+    .pd-cobros { display:block !important; }
     #page-cli { display:none !important; }
   }
 </style>
@@ -301,10 +320,27 @@
       <div class="pd-total"><span class="dl">Total</span><span class="dv" id="pdTotal"></span></div>
       <div class="pd-iva"><span class="dl">IVA 21%</span><span class="dv" id="pdIva"></span></div>
       <div class="pd-totaliva"><span class="dl">Total + IVA</span><span class="dv" id="pdTotalIva"></span></div>
+      <!-- COBROS (visible en impresión si hay datos) -->
+      <div class="pd-cobros" id="pdCobros">
+        <h4>Cobros y diferencia</h4>
+        <div class="pd-cobros-grid">
+          <div>
+            <div class="ci"><span class="cl">Total pre-liquidación</span><span class="cv" id="pdCobrosTotal"></span></div>
+            <div class="ci"><span class="cl">Lo que recibimos</span><span class="cv" id="pdCobrosRecibido"></span></div>
+          </div>
+          <div>
+            <div class="dif neu" id="pdCobrosDif">
+              <span class="dl">Diferencia</span>
+              <span class="dv" id="pdCobrosDifVal">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="pd-footer">Estudio Carracedo · Pre-liquidación no válida como comprobante fiscal</div>
-      <div style="margin-top:16px;display:flex;gap:10px;">
+      <div style="margin-top:16px;display:flex;gap:10px;" class="no-print">
         <button class="btn btn-sec btn-sm" onclick="cerrarPreview()">← Volver</button>
         <button class="btn btn-primary btn-sm" onclick="window.print()">⎙ Imprimir</button>
+        <button class="btn btn-sec btn-sm" onclick="descargarExcel()" style="border-color:var(--success);color:var(--success);">⬇ Descargar Excel</button>
       </div>
     </div>
 
@@ -516,6 +552,22 @@ function mostrarPreview() {
   document.getElementById('pdTotal').textContent=fmtARS(total);
   document.getElementById('pdIva').textContent=fmtARS(iva);
   document.getElementById('pdTotalIva').textContent=fmtARS(total+iva);
+
+  // COBROS EN PREVIEW
+  const recibido=parseFloat(document.getElementById('recibido').value)||0;
+  const cobrosEl=document.getElementById('pdCobros');
+  document.getElementById('pdCobrosTotal').textContent=fmtARS(total);
+  document.getElementById('pdCobrosRecibido').textContent=recibido>0?fmtARS(recibido):'—';
+  if(recibido>0){
+    const diff=recibido-total;
+    const dif=document.getElementById('pdCobrosDif');
+    document.getElementById('pdCobrosDifVal').textContent=diff<0?fmtARS(Math.abs(diff))+' DEBE':diff>0?fmtARS(diff)+' A FAVOR':'$ 0 · EXACTO';
+    dif.className='dif '+(diff<0?'neg':'pos');
+    cobrosEl.style.display='block';
+  } else {
+    cobrosEl.style.display='none';
+  }
+
   document.getElementById('previewDoc').classList.add('on');
   document.getElementById('previewDoc').scrollIntoView({behavior:'smooth'});
 }
@@ -587,6 +639,72 @@ function setLoad(on){document.getElementById('loadingBar').classList.toggle('on'
 function showErr(m){const e=document.getElementById('errBox');e.textContent=m;e.classList.add('on');}
 function hideErr(){document.getElementById('errBox').classList.remove('on');}
 function resetear(){if(confirm('¿Reiniciar todo?')){document.getElementById('formSection').style.display='none';document.getElementById('previewDoc').classList.remove('on');document.getElementById('recibido').value='';hideErr();hideBanner();applyRates(DEFAULT);}}
+
+// ══════════════════════════
+// DESCARGAR EXCEL
+// ══════════════════════════
+function descargarExcel() {
+  const g=id=>document.getElementById(id).value;
+  const ids=['imp21','imp23','imp24','imp25','imp27','impVarios','imp86'];
+  const total=ids.reduce((s,id)=>s+(parseFloat(document.getElementById(id).value)||0),0);
+  const iva=Math.round(total*0.21);
+  const totalIva=Math.round(total+iva);
+  const recibido=parseFloat(g('recibido'))||0;
+  const diferencia=recibido>0?recibido-total:null;
+  const hoy=new Date().toLocaleDateString('es-AR');
+
+  // Construir filas
+  const rows=[
+    ['ESTUDIO CARRACEDO','','','','',''],
+    ['Pre-Liquidación de Gastos','','','','',''],
+    ['','','','','',''],
+    ['Fecha emisión:',hoy,'','N° Despacho:',g('fDespacho'),''],
+    ['Importador / Exportador:',g('fImportador'),'','CUIT:',g('fCuit'),''],
+    ['Fecha Oficialización:',g('fFecha'),'','Vendedor:',g('fVendedor'),''],
+    ['Doc. de Transporte:',g('fDocTransporte'),'','Valor en Aduana:','USD '+g('fValorUSD')+' × $'+g('fCotiz'),''],
+    ['','','','','',''],
+    ['CÓD.','CONCEPTO','','','IMPORTE ($)',''],
+    ['21','Digitalización','','',parseFloat(g('imp21'))||0,''],
+    ['23','ANMAT','','',parseFloat(g('imp23'))||0,''],
+    ['24','Acarreo','','',parseFloat(g('imp24'))||0,''],
+    ['25','Ingreso Zona Primaria','','',parseFloat(g('imp25'))||0,''],
+    ['27','Manejo de Documentación','','',parseFloat(g('imp27'))||0,''],
+  ];
+  if(parseFloat(g('impVarios'))>0) rows.push(['—','Varios','','',parseFloat(g('impVarios'))||0,'']);
+  rows.push(['86','Honorarios Profesionales','','',parseFloat(g('imp86'))||0,'']);
+  rows.push(['','','','','','']);
+  rows.push(['','','','','Total Pre-Liquidación',Math.round(total)]);
+  rows.push(['','','','','IVA 21%',iva]);
+  rows.push(['','','','','Total + IVA',totalIva]);
+  if(recibido>0){
+    rows.push(['','','','','','']);
+    rows.push(['','','','','Lo que recibimos',recibido]);
+    rows.push(['','','','','Diferencia',diferencia]);
+  }
+
+  // Crear libro
+  const wb=XLSX.utils.book_new();
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+
+  // Anchos de columna
+  ws['!cols']=[{wch:8},{wch:30},{wch:5},{wch:5},{wch:24},{wch:18}];
+
+  // Merges para títulos
+  ws['!merges']=[
+    {s:{r:0,c:0},e:{r:0,c:5}},
+    {s:{r:1,c:0},e:{r:1,c:5}},
+    {s:{r:4,c:1},e:{r:4,c:2}},
+    {s:{r:5,c:1},e:{r:5,c:2}},
+  ];
+
+  XLSX.utils.book_append_sheet(wb,ws,'Pre-Liquidación');
+
+  // Nombre de archivo con fecha e importador
+  const importador=(g('fImportador')||'sin-nombre').replace(/[^a-zA-Z0-9\s]/g,'').trim().replace(/\s+/g,'-').substring(0,30);
+  const fechaFile=new Date().toISOString().slice(0,10);
+  XLSX.writeFile(wb,'preliq-'+importador+'-'+fechaFile+'.xlsx');
+}
+
 </script>
 </body>
 </html>
