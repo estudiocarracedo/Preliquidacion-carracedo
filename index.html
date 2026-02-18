@@ -26,7 +26,6 @@
   .page.active { display:block; animation:fadeIn .3s ease; }
   @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
-  /* UPLOAD */
   .upload-zone { border:1.5px dashed var(--border); border-radius:4px; padding:44px 32px; text-align:center; cursor:pointer; background:var(--surface); transition:all .2s; position:relative; }
   .upload-zone:hover,.upload-zone.drag { border-color:var(--accent); background:#1a1f0f; }
   .upload-zone input { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
@@ -43,30 +42,25 @@
   .err-box { display:none; background:#1a0000; border:1px solid var(--danger); color:var(--danger); padding:10px 14px; font-size:12px; border-radius:2px; margin-top:12px; }
   .err-box.on { display:block; }
 
-  /* API KEY BANNER */
   .apikey-banner { background:#0d0d1f; border:1px solid var(--accent3); border-radius:3px; padding:12px 16px; margin-bottom:20px; font-size:12px; color:var(--accent3); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
   .apikey-banner input { background:var(--surface); border:1px solid var(--border); color:var(--text); font-family:'DM Mono',monospace; font-size:12px; padding:6px 10px; border-radius:2px; outline:none; flex:1; min-width:200px; }
   .apikey-banner button { font-family:'Syne',sans-serif; font-weight:700; font-size:10px; letter-spacing:1px; text-transform:uppercase; padding:7px 14px; background:var(--accent3); color:#000; border:none; border-radius:2px; cursor:pointer; white-space:nowrap; }
 
-  /* CLIENT BANNER */
   .client-banner { display:none; align-items:center; gap:12px; background:#0d1f0d; border:1px solid var(--success); border-radius:3px; padding:10px 16px; margin-bottom:18px; font-size:12px; color:var(--success); }
   .client-banner.on { display:flex; }
   .tag-pf { background:var(--success); color:#000; font-size:9px; font-weight:700; letter-spacing:1.5px; padding:2px 8px; border-radius:2px; }
 
-  /* SECTION LABEL */
   .slabel { font-family:'Syne',sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
   .slabel::after { content:''; flex:1; height:1px; background:var(--border); }
 
-  /* FORM */
   .fg { display:flex; flex-direction:column; gap:5px; }
   .fg label { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
   .fg input, .fg select { background:var(--surface); border:1px solid var(--border); color:var(--text); font-family:'DM Mono',monospace; font-size:13px; padding:9px 12px; border-radius:2px; outline:none; transition:border-color .15s; width:100%; }
-  .fg input:focus, .fg select:focus { border-color:var(--accent); }
+  .fg input:focus { border-color:var(--accent); }
   .fg .sub { font-size:10px; color:var(--accent2); margin-top:3px; }
   .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-bottom:24px; }
   .full { grid-column:1/-1; }
 
-  /* TABLE */
   .liq-table { width:100%; border-collapse:collapse; margin-bottom:0; }
   .liq-table thead tr { border-bottom:1px solid var(--border); }
   .liq-table th { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); padding:9px 12px; text-align:left; font-weight:500; }
@@ -78,19 +72,31 @@
   .hon-row td { background:#131300; }
   .note { font-size:10px; color:var(--muted); margin-top:2px; }
 
-  /* TOTALS */
-  .total-section { border-top:2px solid var(--accent); }
-  .total-row { display:flex; justify-content:flex-end; align-items:center; gap:20px; padding:16px 12px; }
-  .total-row .lbl { font-family:'Syne',sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
-  .total-row .val { font-family:'Syne',sans-serif; font-weight:800; font-size:26px; color:var(--accent); }
-  .iva-row { display:flex; justify-content:flex-end; align-items:center; gap:20px; padding:12px 12px; border-top:1px solid var(--border); background:#131313; }
-  .iva-row .lbl { font-size:11px; color:var(--muted); }
-  .iva-row .val { font-size:14px; color:var(--muted); min-width:170px; text-align:right; }
-  .totaliva-row { display:flex; justify-content:flex-end; align-items:center; gap:20px; padding:14px 12px; border-top:1px solid var(--border); background:#131313; }
-  .totaliva-row .lbl { font-family:'Syne',sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#aaa; }
-  .totaliva-row .val { font-family:'Syne',sans-serif; font-weight:800; font-size:22px; color:var(--accent2); }
+  /* TOTALS + RECIBIDO */
+  .total-section { border-top:2px solid var(--accent); display:grid; grid-template-columns:1fr 1fr; }
+  .totals-left { border-right:1px solid var(--border); padding:16px 12px; }
+  .totals-right { padding:16px 12px; }
+  .t-row { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:8px 0; }
+  .t-row .lbl { font-family:'Syne',sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+  .t-row .val { font-family:'Syne',sans-serif; font-weight:800; font-size:26px; color:var(--accent); }
+  .t-row.iva .lbl { font-size:11px; font-family:'DM Mono',monospace; font-weight:400; }
+  .t-row.iva .val { font-size:14px; color:var(--muted); font-weight:400; }
+  .t-row.tiva { border-top:1px solid var(--border); }
+  .t-row.tiva .val { font-size:22px; color:var(--accent2); }
+  .recibido-fg { display:flex; flex-direction:column; gap:5px; margin-bottom:12px; }
+  .recibido-fg label { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+  .recibido-fg input { background:var(--surface); border:1px solid var(--border); color:var(--text); font-family:'DM Mono',monospace; font-size:15px; padding:9px 12px; border-radius:2px; outline:none; width:100%; text-align:right; transition:border-color .15s; }
+  .recibido-fg input:focus { border-color:var(--accent3); }
+  .dif-row { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-radius:3px; margin-top:6px; }
+  .dif-row .dl { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+  .dif-row .dv { font-family:'Syne',sans-serif; font-weight:800; font-size:20px; }
+  .dif-row.pos { background:#0d1f0d; border:1px solid #2a5a2a; }
+  .dif-row.pos .dv { color:var(--success); }
+  .dif-row.neg { background:#1f0d0d; border:1px solid #5a2a2a; }
+  .dif-row.neg .dv { color:var(--danger); }
+  .dif-row.neu { background:var(--surface2); border:1px solid var(--border); }
+  .dif-row.neu .dv { color:var(--muted); }
 
-  /* BUTTONS */
   .actions { display:flex; gap:10px; margin-top:24px; flex-wrap:wrap; align-items:center; }
   .btn { font-family:'Syne',sans-serif; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; padding:11px 22px; border:none; border-radius:2px; cursor:pointer; transition:all .15s; }
   .btn-primary { background:var(--accent); color:#000; }
@@ -107,7 +113,7 @@
   .preview-doc { display:none; background:#fff; color:#111; padding:48px; border-radius:4px; margin-top:24px; font-family:'DM Mono',monospace; border:1px solid var(--border); }
   .preview-doc.on { display:block; animation:fadeIn .4s ease; }
   .pd-head { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; padding-bottom:18px; border-bottom:2px solid #111; }
-  .pd-title { font-family:'Syne',sans-serif; font-size:26px; font-weight:800; color:#111; letter-spacing:-1px; }
+  .pd-title { font-family:'Syne',sans-serif; font-size:32px; font-weight:800; color:#111; letter-spacing:-1px; }
   .pd-title span { display:block; font-size:10px; letter-spacing:3px; font-weight:400; color:#999; margin-bottom:4px; font-family:'DM Mono',monospace; }
   .pd-meta { text-align:right; font-size:11px; color:#666; line-height:1.9; }
   .pd-info { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px 22px; margin-bottom:24px; padding:16px; background:#f5f5f5; border-left:4px solid #111; }
@@ -138,6 +144,10 @@
   .client-form.on { display:block; animation:fadeIn .25s ease; }
   .client-form h3 { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; margin-bottom:16px; }
   .rates-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:12px; }
+  .hon-toggle { display:flex; gap:6px; margin-bottom:10px; }
+  .hon-toggle button { font-family:'Syne',sans-serif; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:6px 14px; border-radius:2px; cursor:pointer; border:1px solid var(--border); background:none; color:var(--muted); transition:all .15s; }
+  .hon-toggle button.active { background:var(--accent); color:#000; border-color:var(--accent); }
+  .hon-fields { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
   .client-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
   .client-card { background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:18px 20px; }
   .cc-head { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:12px; }
@@ -154,6 +164,7 @@
   .rate-item.hon .rv { color:var(--accent2); }
   .no-clients { text-align:center; color:var(--muted); padding:48px; border:1px dashed var(--border); border-radius:4px; font-size:13px; display:none; }
 
+  @media (max-width:680px) { .total-section { grid-template-columns:1fr; } .totals-left { border-right:none; border-bottom:1px solid var(--border); } }
   @media print {
     header,.upload-zone,.actions,.slabel,.client-banner,.loading-bar,.loading-txt,.err-box,.apikey-banner { display:none !important; }
     body { background:#fff; }
@@ -177,15 +188,14 @@
 
 <div class="container">
 
-  <!-- ══ LIQUIDACIÓN ══ -->
+  <!-- LIQUIDACIÓN -->
   <div class="page active" id="page-liq">
 
-    <!-- API KEY -->
     <div class="apikey-banner" id="apikeyBanner">
       <span>🔑 API Key de Anthropic:</span>
       <input type="password" id="apiKeyInput" placeholder="sk-ant-..." oninput="saveApiKey()">
       <button onclick="document.getElementById('apikeyBanner').style.display='none'">Listo</button>
-      <span style="font-size:10px; color:#4a8a9a;">Se guarda solo en tu navegador · <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent3)">Conseguir clave</a></span>
+      <span style="font-size:10px;color:#4a8a9a;">Se guarda en tu navegador · <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent3)">Conseguir clave</a></span>
     </div>
 
     <div class="upload-zone" id="uploadZone">
@@ -199,7 +209,7 @@
     <div class="loading-txt" id="loadingTxt">⏳ PROCESANDO PDF CON IA...</div>
     <div class="err-box" id="errBox"></div>
 
-    <div id="formSection" style="display:none; margin-top:28px;">
+    <div id="formSection" style="display:none;margin-top:28px;">
 
       <div class="client-banner" id="clientBanner">
         <span class="tag-pf">PERFIL</span>
@@ -236,6 +246,7 @@
           <tr><td class="cod">24</td><td>Acarreo</td><td style="text-align:right"><input class="amt-input" type="number" id="imp24" value="350000" oninput="calcTotal()"></td></tr>
           <tr><td class="cod">25</td><td>Ingreso Zona Primaria</td><td style="text-align:right"><input class="amt-input" type="number" id="imp25" value="200000" oninput="calcTotal()"></td></tr>
           <tr><td class="cod">27</td><td>Manejo de Documentación</td><td style="text-align:right"><input class="amt-input" type="number" id="imp27" value="250000" oninput="calcTotal()"></td></tr>
+          <tr><td class="cod" style="color:var(--muted)">—</td><td>Varios</td><td style="text-align:right"><input class="amt-input" type="number" id="impVarios" value="0" oninput="calcTotal()"></td></tr>
           <tr class="hon-row">
             <td class="cod">86</td>
             <td><div>Honorarios Profesionales</div><div class="note" id="honNote">— se calcula sobre valor en aduana</div></td>
@@ -245,17 +256,30 @@
       </table>
 
       <div class="total-section">
-        <div class="total-row">
-          <span class="lbl">Total Pre-Liquidación</span>
-          <span class="val" id="totalDisplay">$ 0</span>
+        <div class="totals-left">
+          <div class="t-row">
+            <span class="lbl">Total</span>
+            <span class="val" id="totalDisplay">$ 0</span>
+          </div>
+          <div class="t-row iva">
+            <span class="lbl">IVA 21%</span>
+            <span class="val" id="ivaDisplay">$ 0</span>
+          </div>
+          <div class="t-row tiva">
+            <span class="lbl">Total + IVA</span>
+            <span class="val" id="totalIvaDisplay">$ 0</span>
+          </div>
         </div>
-        <div class="iva-row">
-          <span class="lbl">IVA 21%</span>
-          <span class="val" id="ivaDisplay">$ 0</span>
-        </div>
-        <div class="totaliva-row">
-          <span class="lbl">Total + IVA</span>
-          <span class="val" id="totalIvaDisplay">$ 0</span>
+        <div class="totals-right">
+          <div class="slabel">Cobros</div>
+          <div class="recibido-fg">
+            <label>Lo que recibimos ($)</label>
+            <input type="number" id="recibido" placeholder="0" oninput="calcDiferencia()">
+          </div>
+          <div class="dif-row neu" id="difRow">
+            <span class="dl">Diferencia</span>
+            <span class="dv" id="difDisplay">—</span>
+          </div>
         </div>
       </div>
 
@@ -264,13 +288,12 @@
         <button class="btn btn-sec" onclick="window.print()">⎙ Imprimir</button>
         <button class="btn btn-red" onclick="resetear()">✕ Reiniciar</button>
       </div>
-
-    </div><!-- /formSection -->
+    </div>
 
     <!-- PREVIEW -->
     <div class="preview-doc" id="previewDoc">
       <div class="pd-head">
-        <div class="pd-title"><span>PRE-LIQUIDACIÓN</span>Despacho Aduanero</div>
+        <div class="pd-title"><span>PRE-LIQUIDACIÓN</span>Estudio Carracedo</div>
         <div class="pd-meta" id="pdMeta"></div>
       </div>
       <div class="pd-info" id="pdInfo"></div>
@@ -285,10 +308,9 @@
       </div>
     </div>
 
-  </div><!-- /page-liq -->
+  </div>
 
-
-  <!-- ══ CLIENTES ══ -->
+  <!-- CLIENTES -->
   <div class="page" id="page-cli">
     <div class="clients-header">
       <h2>Perfiles de Clientes</h2>
@@ -299,12 +321,28 @@
     <div class="client-form" id="clientForm">
       <h3 id="formClientTitle">Nuevo perfil</h3>
       <input type="hidden" id="editingIdx" value="">
-      <div class="grid2" style="margin-bottom:0;">
+      <div class="grid2" style="margin-bottom:14px;">
         <div class="fg full"><label>Nombre / Razón Social</label><input type="text" id="cNombre" placeholder="Ej: ACME S.A."></div>
-        <div class="fg"><label>CUIT</label><input type="text" id="cCuit" placeholder="XX-XXXXXXXX-X"></div>
-        <div class="fg"><label>% Honorarios (cod. 86)</label><input type="number" id="cHon" value="2" step="0.1" min="0"></div>
+        <div class="fg full"><label>CUIT</label><input type="text" id="cCuit" placeholder="XX-XXXXXXXX-X"></div>
       </div>
-      <div style="margin-top:14px;">
+
+      <div class="slabel">Honorarios (cod. 86)</div>
+      <div class="hon-toggle">
+        <button id="btnHonPct" class="active" onclick="setHonMode('pct')">% Porcentaje</button>
+        <button id="btnHonFijo" onclick="setHonMode('fijo')">$ Monto fijo</button>
+      </div>
+      <div class="hon-fields">
+        <div class="fg" id="fieldHonPct">
+          <label>Porcentaje (%)</label>
+          <input type="number" id="cHon" value="2" step="0.1" min="0">
+        </div>
+        <div class="fg" id="fieldHonFijo" style="display:none;">
+          <label>Monto fijo ($)</label>
+          <input type="number" id="cHonFijo" value="0">
+        </div>
+      </div>
+
+      <div style="margin-top:16px;">
         <div class="slabel">Importes fijos</div>
         <div class="rates-grid">
           <div class="fg"><label>Digitalización (21) $</label><input type="number" id="c21" value="220000"></div>
@@ -312,6 +350,7 @@
           <div class="fg"><label>Acarreo (24) $</label><input type="number" id="c24" value="350000"></div>
           <div class="fg"><label>Ingreso Zona Primaria (25) $</label><input type="number" id="c25" value="200000"></div>
           <div class="fg"><label>Manejo de Doc. (27) $</label><input type="number" id="c27" value="250000"></div>
+          <div class="fg"><label>Varios $</label><input type="number" id="cVarios" value="0"></div>
         </div>
       </div>
       <div style="display:flex;gap:10px;margin-top:18px;">
@@ -324,173 +363,147 @@
     <div class="no-clients" id="noClients">No hay clientes guardados aún.<br><span style="font-size:11px;margin-top:8px;display:block;">Hacé clic en "+ Nuevo cliente" para agregar el primero.</span></div>
   </div>
 
-</div><!-- /container -->
+</div>
 
 <script>
-// ══════════════════════════
-// API KEY
-// ══════════════════════════
 function getApiKey() { return localStorage.getItem('ec_apikey') || ''; }
 function saveApiKey() { localStorage.setItem('ec_apikey', document.getElementById('apiKeyInput').value.trim()); }
-
 window.addEventListener('load', () => {
   const k = getApiKey();
-  if (k) {
-    document.getElementById('apiKeyInput').value = k;
-    document.getElementById('apikeyBanner').style.display = 'none';
-  }
+  if (k) { document.getElementById('apiKeyInput').value = k; document.getElementById('apikeyBanner').style.display = 'none'; }
 });
 
-// ══════════════════════════
-// STORAGE
-// ══════════════════════════
 function getClientes() { try { return JSON.parse(localStorage.getItem('ec_clientes') || '[]'); } catch { return []; } }
 function saveClientes(a) { localStorage.setItem('ec_clientes', JSON.stringify(a)); }
 function normCuit(c) { return (c||'').replace(/[^0-9]/g,''); }
 function fmtARS(n) { return '$ ' + Math.round(n||0).toLocaleString('es-AR'); }
 
-const DEFAULT = { imp21:220000, imp23:200000, imp24:350000, imp25:200000, imp27:250000, honPct:2 };
-let activeHonPct = 2;
+const DEFAULT = { imp21:220000, imp23:200000, imp24:350000, imp25:200000, imp27:250000, impVarios:0, honPct:2, honFijo:0, honMode:'pct' };
+let activeHonPct=2, activeHonFijo=0, activeHonMode='pct';
 
-// ══════════════════════════
-// NAVIGATION
-// ══════════════════════════
 function showPage(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
   btn.classList.add('active');
-  if (id === 'cli') renderClientes();
+  if (id==='cli') renderClientes();
 }
 
-// ══════════════════════════
-// DRAG & DROP
-// ══════════════════════════
 const uz = document.getElementById('uploadZone');
-uz.addEventListener('dragover', e => { e.preventDefault(); uz.classList.add('drag'); });
-uz.addEventListener('dragleave', () => uz.classList.remove('drag'));
-uz.addEventListener('drop', e => { e.preventDefault(); uz.classList.remove('drag'); const f = Array.from(e.dataTransfer.files).filter(f=>f.type==='application/pdf'); if(f.length) procesarPDFs(f); });
-function handleFiles(files) { const f = Array.from(files).filter(f=>f.type==='application/pdf'); if(f.length) procesarPDFs(f); }
+uz.addEventListener('dragover', e=>{e.preventDefault();uz.classList.add('drag');});
+uz.addEventListener('dragleave', ()=>uz.classList.remove('drag'));
+uz.addEventListener('drop', e=>{e.preventDefault();uz.classList.remove('drag');const f=Array.from(e.dataTransfer.files).filter(f=>f.type==='application/pdf');if(f.length)procesarPDFs(f);});
+function handleFiles(files){const f=Array.from(files).filter(f=>f.type==='application/pdf');if(f.length)procesarPDFs(f);}
 
-// ══════════════════════════
-// PROCESAR PDF
-// ══════════════════════════
 async function procesarPDFs(files) {
   const apiKey = getApiKey();
-  if (!apiKey) {
-    document.getElementById('apikeyBanner').style.display = 'flex';
-    showErr('Primero ingresá tu API Key de Anthropic arriba ↑');
-    return;
-  }
+  if (!apiKey) { document.getElementById('apikeyBanner').style.display='flex'; showErr('Primero ingresá tu API Key ↑'); return; }
   setLoad(true); hideErr();
   try {
-    const b64s = await Promise.all(files.map(f => new Promise((res,rej) => {
-      const r = new FileReader(); r.onload = () => res(r.result.split(',')[1]); r.onerror = rej; r.readAsDataURL(f);
-    })));
-    const content = b64s.map(b => ({ type:'document', source:{ type:'base64', media_type:'application/pdf', data:b } }));
-    content.push({ type:'text', text:`Analizá ${files.length>1?'estos despachos':'este despacho'} de aduana argentino del sistema SIM/AFIP y extraé los datos en formato JSON exacto. Devolvé SOLO el JSON sin markdown ni backticks.
-{
-  "numero_despacho": "número completo del despacho (ej: 25 073 IC04 105340 Z)",
-  "importador": "nombre completo del importador/exportador",
-  "cuit_importador": "CUIT del importador en formato XX-XXXXXXXX-X",
-  "fecha_oficializacion": "fecha en formato DD/MM/AAAA",
-  "vendedor": "nombre del vendedor",
-  "doc_transporte": "número de guía aérea o conocimiento de embarque",
-  "valor_aduana_usd": suma de TODOS los campos Valor en Aduana en Dólar de todos los ítems como número,
-  "cotizacion": tipo de cambio ARS por USD del campo Cotiz como número
-}` });
-
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{ 'Content-Type':'application/json', 'x-api-key': apiKey, 'anthropic-version':'2023-06-01', 'anthropic-dangerous-direct-browser-access':'true' },
-      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:600, messages:[{role:'user',content}] })
-    });
+    const b64s = await Promise.all(files.map(f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(f);})));
+    const content = b64s.map(b=>({type:'document',source:{type:'base64',media_type:'application/pdf',data:b}}));
+    content.push({type:'text',text:`Analizá este despacho de aduana argentino del sistema SIM/AFIP y extraé los datos en formato JSON exacto. Devolvé SOLO el JSON sin markdown ni backticks.
+{"numero_despacho":"número completo","importador":"nombre completo","cuit_importador":"CUIT en formato XX-XXXXXXXX-X","fecha_oficializacion":"DD/MM/AAAA","vendedor":"nombre del vendedor","doc_transporte":"número de guía o conocimiento","valor_aduana_usd":suma de todos los Valor en Aduana en Dólar como número,"cotizacion":tipo de cambio ARS por USD como número}`});
+    const resp = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,messages:[{role:'user',content}]})});
     const data = await resp.json();
     if (data.error) throw new Error(data.error.message);
-    const raw = data.content.map(b=>b.text||'').join('').trim().replace(/```json|```/g,'').trim();
-    const parsed = JSON.parse(raw);
+    const parsed = JSON.parse(data.content.map(b=>b.text||'').join('').trim().replace(/```json|```/g,'').trim());
     llenarForm(parsed);
     setLoad(false);
-    document.getElementById('formSection').style.display = 'block';
-    document.getElementById('formSection').scrollIntoView({ behavior:'smooth' });
-  } catch(e) {
-    setLoad(false);
-    showErr('Error: ' + e.message);
-  }
+    document.getElementById('formSection').style.display='block';
+    document.getElementById('formSection').scrollIntoView({behavior:'smooth'});
+  } catch(e) { setLoad(false); showErr('Error: '+e.message); }
 }
 
 function llenarForm(d) {
-  document.getElementById('fDespacho').value    = d.numero_despacho || '';
-  document.getElementById('fImportador').value  = d.importador || '';
-  document.getElementById('fCuit').value        = d.cuit_importador || '';
-  document.getElementById('fFecha').value       = d.fecha_oficializacion || '';
-  document.getElementById('fVendedor').value    = d.vendedor || '';
-  document.getElementById('fDocTransporte').value = d.doc_transporte || '';
-  document.getElementById('fValorUSD').value    = d.valor_aduana_usd || '';
-  document.getElementById('fCotiz').value       = d.cotizacion || '';
-  if (d.cotizacion) document.getElementById('cotizSub').textContent = 'Cotización: $' + Number(d.cotizacion).toLocaleString('es-AR') + ' / USD';
-  if (d.cuit_importador) matchCliente(d.cuit_importador);
+  document.getElementById('fDespacho').value=d.numero_despacho||'';
+  document.getElementById('fImportador').value=d.importador||'';
+  document.getElementById('fCuit').value=d.cuit_importador||'';
+  document.getElementById('fFecha').value=d.fecha_oficializacion||'';
+  document.getElementById('fVendedor').value=d.vendedor||'';
+  document.getElementById('fDocTransporte').value=d.doc_transporte||'';
+  document.getElementById('fValorUSD').value=d.valor_aduana_usd||'';
+  document.getElementById('fCotiz').value=d.cotizacion||'';
+  if(d.cotizacion) document.getElementById('cotizSub').textContent='Cotización: $'+Number(d.cotizacion).toLocaleString('es-AR')+' / USD';
+  if(d.cuit_importador) matchCliente(d.cuit_importador);
   else { applyRates(DEFAULT); hideBanner(); }
   recalcular();
 }
 
-// ══════════════════════════
-// CLIENT MATCHING
-// ══════════════════════════
 function matchCliente(cuit) {
-  const m = getClientes().find(c => normCuit(c.cuit) === normCuit(cuit));
-  if (m) { applyRates(m); showBanner(m); }
-  else { applyRates(DEFAULT); hideBanner(); }
+  const m=getClientes().find(c=>normCuit(c.cuit)===normCuit(cuit));
+  if(m){applyRates(m);showBanner(m);}else{applyRates(DEFAULT);hideBanner();}
 }
-function onCuitInput() { const v = document.getElementById('fCuit').value; if(normCuit(v).length>=10) matchCliente(v); }
+function onCuitInput(){const v=document.getElementById('fCuit').value;if(normCuit(v).length>=10)matchCliente(v);}
+
 function applyRates(r) {
-  document.getElementById('imp21').value = r.imp21 ?? DEFAULT.imp21;
-  document.getElementById('imp23').value = r.imp23 ?? DEFAULT.imp23;
-  document.getElementById('imp24').value = r.imp24 ?? DEFAULT.imp24;
-  document.getElementById('imp25').value = r.imp25 ?? DEFAULT.imp25;
-  document.getElementById('imp27').value = r.imp27 ?? DEFAULT.imp27;
-  activeHonPct = parseFloat(r.honPct ?? DEFAULT.honPct) || 2;
+  document.getElementById('imp21').value=r.imp21??DEFAULT.imp21;
+  document.getElementById('imp23').value=r.imp23??DEFAULT.imp23;
+  document.getElementById('imp24').value=r.imp24??DEFAULT.imp24;
+  document.getElementById('imp25').value=r.imp25??DEFAULT.imp25;
+  document.getElementById('imp27').value=r.imp27??DEFAULT.imp27;
+  document.getElementById('impVarios').value=r.impVarios??DEFAULT.impVarios;
+  activeHonPct=parseFloat(r.honPct??DEFAULT.honPct)||2;
+  activeHonFijo=parseFloat(r.honFijo??DEFAULT.honFijo)||0;
+  activeHonMode=r.honMode??DEFAULT.honMode;
   recalcular();
 }
+
 function showBanner(c) {
-  document.getElementById('bannerName').textContent = c.nombre;
-  document.getElementById('bannerSub').textContent  = 'Perfil aplicado automáticamente · Honorarios: ' + c.honPct + '%';
+  document.getElementById('bannerName').textContent=c.nombre;
+  const h=c.honMode==='fijo'?'Honorarios fijos: $'+Number(c.honFijo).toLocaleString('es-AR'):'Honorarios: '+c.honPct+'%';
+  document.getElementById('bannerSub').textContent='Perfil aplicado automáticamente · '+h;
   document.getElementById('clientBanner').classList.add('on');
 }
-function hideBanner() { document.getElementById('clientBanner').classList.remove('on'); }
+function hideBanner(){document.getElementById('clientBanner').classList.remove('on');}
 
-// ══════════════════════════
-// CALCULATIONS
-// ══════════════════════════
 function recalcular() {
-  const usd = parseFloat(document.getElementById('fValorUSD').value)||0;
-  const cot = parseFloat(document.getElementById('fCotiz').value)||0;
-  const hon = Math.round(usd * (activeHonPct/100) * cot);
-  document.getElementById('imp86').value = hon > 0 ? hon : '';
-  document.getElementById('honNote').textContent = (usd>0&&cot>0)
-    ? activeHonPct+'% × USD '+usd.toLocaleString('en-US',{minimumFractionDigits:2})+' × $'+cot.toLocaleString('es-AR')+' = '+fmtARS(hon)
-    : '— '+activeHonPct+'% sobre valor en aduana × cotización';
+  const usd=parseFloat(document.getElementById('fValorUSD').value)||0;
+  const cot=parseFloat(document.getElementById('fCotiz').value)||0;
+  let hon=0;
+  if(activeHonMode==='fijo'){
+    hon=activeHonFijo;
+    document.getElementById('honNote').textContent='Monto fijo: '+fmtARS(hon);
+  } else {
+    hon=Math.round(usd*(activeHonPct/100)*cot);
+    document.getElementById('honNote').textContent=(usd>0&&cot>0)?activeHonPct+'% × USD '+usd.toLocaleString('en-US',{minimumFractionDigits:2})+' × $'+cot.toLocaleString('es-AR')+' = '+fmtARS(hon):'— '+activeHonPct+'% sobre valor en aduana × cotización';
+  }
+  document.getElementById('imp86').value=hon>0?hon:'';
   calcTotal();
 }
+
 function calcTotal() {
-  const ids = ['imp21','imp23','imp24','imp25','imp27','imp86'];
-  const total = ids.reduce((s,id) => s+(parseFloat(document.getElementById(id).value)||0), 0);
-  const iva = total * 0.21;
-  document.getElementById('totalDisplay').textContent    = fmtARS(total);
-  document.getElementById('ivaDisplay').textContent      = fmtARS(iva);
-  document.getElementById('totalIvaDisplay').textContent = fmtARS(total + iva);
+  const ids=['imp21','imp23','imp24','imp25','imp27','impVarios','imp86'];
+  const total=ids.reduce((s,id)=>s+(parseFloat(document.getElementById(id).value)||0),0);
+  const iva=total*0.21;
+  document.getElementById('totalDisplay').textContent=fmtARS(total);
+  document.getElementById('ivaDisplay').textContent=fmtARS(iva);
+  document.getElementById('totalIvaDisplay').textContent=fmtARS(total+iva);
+  calcDiferencia();
   return total;
 }
 
-// ══════════════════════════
-// PREVIEW
-// ══════════════════════════
+function calcDiferencia() {
+  const ids=['imp21','imp23','imp24','imp25','imp27','impVarios','imp86'];
+  const total=ids.reduce((s,id)=>s+(parseFloat(document.getElementById(id).value)||0),0);
+  const recibido=parseFloat(document.getElementById('recibido').value)||0;
+  const row=document.getElementById('difRow');
+  const dsp=document.getElementById('difDisplay');
+  if(!recibido){dsp.textContent='—';row.className='dif-row neu';return;}
+  const diff=recibido-total;
+  if(diff<0){dsp.textContent=fmtARS(Math.abs(diff))+' DEBE';row.className='dif-row neg';}
+  else if(diff>0){dsp.textContent=fmtARS(diff)+' A FAVOR';row.className='dif-row pos';}
+  else{dsp.textContent='$ 0 · EXACTO';row.className='dif-row pos';}
+}
+
 function mostrarPreview() {
-  const g = id => document.getElementById(id).value;
-  const usd=parseFloat(g('fValorUSD'))||0, cot=parseFloat(g('fCotiz'))||0;
-  const total=calcTotal(), iva=total*0.21, hoy=new Date().toLocaleDateString('es-AR');
-  document.getElementById('pdMeta').innerHTML = 'Fecha emisión: '+hoy+'<br>Despacho: '+(g('fDespacho')||'—');
-  document.getElementById('pdInfo').innerHTML = `
+  const g=id=>document.getElementById(id).value;
+  const usd=parseFloat(g('fValorUSD'))||0,cot=parseFloat(g('fCotiz'))||0;
+  const ids=['imp21','imp23','imp24','imp25','imp27','impVarios','imp86'];
+  const total=ids.reduce((s,id)=>s+(parseFloat(document.getElementById(id).value)||0),0);
+  const iva=total*0.21,hoy=new Date().toLocaleDateString('es-AR');
+  document.getElementById('pdMeta').innerHTML='Fecha emisión: '+hoy+'<br>Despacho: '+(g('fDespacho')||'—');
+  document.getElementById('pdInfo').innerHTML=`
     <div class="ii full"><label>Importador / Exportador</label><p>${g('fImportador')||'—'}</p></div>
     <div class="ii"><label>CUIT</label><p>${g('fCuit')||'—'}</p></div>
     <div class="ii"><label>Fecha Oficialización</label><p>${g('fFecha')||'—'}</p></div>
@@ -498,84 +511,82 @@ function mostrarPreview() {
     <div class="ii"><label>Vendedor</label><p>${g('fVendedor')||'—'}</p></div>
     <div class="ii"><label>Doc. de Transporte</label><p>${g('fDocTransporte')||'—'}</p></div>
     <div class="ii"><label>Valor en Aduana</label><p>USD ${usd.toLocaleString('en-US',{minimumFractionDigits:2})} × $${cot.toLocaleString('es-AR')}</p></div>`;
-  const items = [{cod:'21',label:'Digitalización'},{cod:'23',label:'ANMAT'},{cod:'24',label:'Acarreo'},{cod:'25',label:'Ingreso Zona Primaria'},{cod:'27',label:'Manejo de Documentación'},{cod:'86',label:'Honorarios Profesionales'}];
-  document.getElementById('pdItems').innerHTML = items.map(it => {
-    const v = parseFloat(document.getElementById('imp'+it.cod).value)||0;
-    return `<tr><td>${it.cod}</td><td>${it.label}</td><td>${fmtARS(v)}</td></tr>`;
-  }).join('');
-  document.getElementById('pdTotal').textContent    = fmtARS(total);
-  document.getElementById('pdIva').textContent      = fmtARS(iva);
-  document.getElementById('pdTotalIva').textContent = fmtARS(total+iva);
+  const items=[{cod:'21',label:'Digitalización',id:'imp21'},{cod:'23',label:'ANMAT',id:'imp23'},{cod:'24',label:'Acarreo',id:'imp24'},{cod:'25',label:'Ingreso Zona Primaria',id:'imp25'},{cod:'27',label:'Manejo de Documentación',id:'imp27'},{cod:'—',label:'Varios',id:'impVarios'},{cod:'86',label:'Honorarios Profesionales',id:'imp86'}];
+  document.getElementById('pdItems').innerHTML=items.filter(it=>parseFloat(document.getElementById(it.id).value)>0).map(it=>`<tr><td>${it.cod}</td><td>${it.label}</td><td>${fmtARS(parseFloat(document.getElementById(it.id).value))}</td></tr>`).join('');
+  document.getElementById('pdTotal').textContent=fmtARS(total);
+  document.getElementById('pdIva').textContent=fmtARS(iva);
+  document.getElementById('pdTotalIva').textContent=fmtARS(total+iva);
   document.getElementById('previewDoc').classList.add('on');
   document.getElementById('previewDoc').scrollIntoView({behavior:'smooth'});
 }
-function cerrarPreview() { document.getElementById('previewDoc').classList.remove('on'); }
+function cerrarPreview(){document.getElementById('previewDoc').classList.remove('on');}
 
-// ══════════════════════════
-// CLIENTES CRUD
-// ══════════════════════════
-function renderClientes() {
-  const list = getClientes();
-  document.getElementById('clientCount').textContent = list.length+' cliente'+(list.length!==1?'s':'');
-  const nc = document.getElementById('noClients'), cc = document.getElementById('clientCards');
-  if (!list.length) { cc.innerHTML=''; nc.style.display='block'; return; }
-  nc.style.display='none';
-  cc.innerHTML = list.map((c,i) => `
-    <div class="client-card">
-      <div class="cc-head">
-        <div><div class="cc-name">${c.nombre}</div><div class="cc-cuit">${c.cuit||'Sin CUIT'}</div></div>
-        <div class="cc-btns">
-          <button class="icon-btn" onclick="editarCliente(${i})">✏</button>
-          <button class="icon-btn del" onclick="eliminarCliente(${i})">✕</button>
-        </div>
-      </div>
-      <div class="cc-rates">
-        ${[['Cod 21',c.imp21],['Cod 23',c.imp23],['Cod 24',c.imp24],['Cod 25',c.imp25],['Cod 27',c.imp27]].map(([l,v])=>`<div class="rate-item"><div class="rl">${l}</div><div class="rv">$${Number(v).toLocaleString('es-AR')}</div></div>`).join('')}
-        <div class="rate-item hon"><div class="rl">Honorarios</div><div class="rv">${c.honPct}%</div></div>
-      </div>
-    </div>`).join('');
+function setHonMode(mode) {
+  document.getElementById('fieldHonPct').style.display=mode==='pct'?'':'none';
+  document.getElementById('fieldHonFijo').style.display=mode==='fijo'?'':'none';
+  document.getElementById('btnHonPct').classList.toggle('active',mode==='pct');
+  document.getElementById('btnHonFijo').classList.toggle('active',mode==='fijo');
 }
 
-function abrirFormCliente(c, idx) {
-  document.getElementById('formClientTitle').textContent = c ? 'Editar perfil' : 'Nuevo perfil';
-  document.getElementById('editingIdx').value = idx !== undefined ? idx : '';
-  document.getElementById('cNombre').value = c?.nombre||'';
-  document.getElementById('cCuit').value   = c?.cuit||'';
-  document.getElementById('cHon').value    = c?.honPct??2;
-  document.getElementById('c21').value     = c?.imp21??220000;
-  document.getElementById('c23').value     = c?.imp23??200000;
-  document.getElementById('c24').value     = c?.imp24??350000;
-  document.getElementById('c25').value     = c?.imp25??200000;
-  document.getElementById('c27').value     = c?.imp27??250000;
+function renderClientes() {
+  const list=getClientes();
+  document.getElementById('clientCount').textContent=list.length+' cliente'+(list.length!==1?'s':'');
+  const nc=document.getElementById('noClients'),cc=document.getElementById('clientCards');
+  if(!list.length){cc.innerHTML='';nc.style.display='block';return;}
+  nc.style.display='none';
+  cc.innerHTML=list.map((c,i)=>{
+    const hd=c.honMode==='fijo'?'$'+Number(c.honFijo).toLocaleString('es-AR')+' fijo':c.honPct+'%';
+    return `<div class="client-card">
+      <div class="cc-head">
+        <div><div class="cc-name">${c.nombre}</div><div class="cc-cuit">${c.cuit||'Sin CUIT'}</div></div>
+        <div class="cc-btns"><button class="icon-btn" onclick="editarCliente(${i})">✏</button><button class="icon-btn del" onclick="eliminarCliente(${i})">✕</button></div>
+      </div>
+      <div class="cc-rates">
+        ${[['Cod 21',c.imp21],['Cod 23',c.imp23],['Cod 24',c.imp24],['Cod 25',c.imp25],['Cod 27',c.imp27],['Varios',c.impVarios||0]].map(([l,v])=>`<div class="rate-item"><div class="rl">${l}</div><div class="rv">$${Number(v).toLocaleString('es-AR')}</div></div>`).join('')}
+        <div class="rate-item hon"><div class="rl">Honorarios</div><div class="rv">${hd}</div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function abrirFormCliente(c,idx) {
+  document.getElementById('formClientTitle').textContent=c?'Editar perfil':'Nuevo perfil';
+  document.getElementById('editingIdx').value=idx!==undefined?idx:'';
+  document.getElementById('cNombre').value=c?.nombre||'';
+  document.getElementById('cCuit').value=c?.cuit||'';
+  document.getElementById('cHon').value=c?.honPct??2;
+  document.getElementById('cHonFijo').value=c?.honFijo??0;
+  document.getElementById('c21').value=c?.imp21??220000;
+  document.getElementById('c23').value=c?.imp23??200000;
+  document.getElementById('c24').value=c?.imp24??350000;
+  document.getElementById('c25').value=c?.imp25??200000;
+  document.getElementById('c27').value=c?.imp27??250000;
+  document.getElementById('cVarios').value=c?.impVarios??0;
+  setHonMode(c?.honMode||'pct');
   document.getElementById('clientForm').classList.add('on');
   document.getElementById('clientForm').scrollIntoView({behavior:'smooth'});
 }
-function cerrarFormCliente() { document.getElementById('clientForm').classList.remove('on'); }
+function cerrarFormCliente(){document.getElementById('clientForm').classList.remove('on');}
 
 function guardarCliente() {
-  const nombre = document.getElementById('cNombre').value.trim();
-  if (!nombre) { alert('Ingresá un nombre'); return; }
-  const cuit = document.getElementById('cCuit').value.trim();
-  const cliente = { nombre, cuit, honPct:parseFloat(document.getElementById('cHon').value)||2, imp21:parseFloat(document.getElementById('c21').value)||0, imp23:parseFloat(document.getElementById('c23').value)||0, imp24:parseFloat(document.getElementById('c24').value)||0, imp25:parseFloat(document.getElementById('c25').value)||0, imp27:parseFloat(document.getElementById('c27').value)||0 };
-  const list = getClientes();
-  const idx = document.getElementById('editingIdx').value;
-  if (idx !== '') { list[parseInt(idx)] = cliente; }
-  else {
-    if (cuit && list.some(c => normCuit(c.cuit)===normCuit(cuit) && normCuit(cuit).length>0)) { alert('Ya existe un cliente con ese CUIT'); return; }
-    list.push(cliente);
-  }
-  saveClientes(list); cerrarFormCliente(); renderClientes();
+  const nombre=document.getElementById('cNombre').value.trim();
+  if(!nombre){alert('Ingresá un nombre');return;}
+  const cuit=document.getElementById('cCuit').value.trim();
+  const honMode=document.getElementById('btnHonFijo').classList.contains('active')?'fijo':'pct';
+  const cliente={nombre,cuit,honMode,honPct:parseFloat(document.getElementById('cHon').value)||2,honFijo:parseFloat(document.getElementById('cHonFijo').value)||0,imp21:parseFloat(document.getElementById('c21').value)||0,imp23:parseFloat(document.getElementById('c23').value)||0,imp24:parseFloat(document.getElementById('c24').value)||0,imp25:parseFloat(document.getElementById('c25').value)||0,imp27:parseFloat(document.getElementById('c27').value)||0,impVarios:parseFloat(document.getElementById('cVarios').value)||0};
+  const list=getClientes();
+  const idx=document.getElementById('editingIdx').value;
+  if(idx!==''){list[parseInt(idx)]=cliente;}
+  else{if(cuit&&list.some(c=>normCuit(c.cuit)===normCuit(cuit)&&normCuit(cuit).length>0)){alert('Ya existe un cliente con ese CUIT');return;}list.push(cliente);}
+  saveClientes(list);cerrarFormCliente();renderClientes();
 }
-function editarCliente(idx) { abrirFormCliente(getClientes()[idx], idx); }
-function eliminarCliente(idx) { if(!confirm('¿Eliminar este perfil?')) return; const l=getClientes(); l.splice(idx,1); saveClientes(l); renderClientes(); }
+function editarCliente(idx){abrirFormCliente(getClientes()[idx],idx);}
+function eliminarCliente(idx){if(!confirm('¿Eliminar este perfil?'))return;const l=getClientes();l.splice(idx,1);saveClientes(l);renderClientes();}
 
-// ══════════════════════════
-// HELPERS
-// ══════════════════════════
-function setLoad(on) { document.getElementById('loadingBar').classList.toggle('on',on); document.getElementById('loadingTxt').classList.toggle('on',on); }
-function showErr(m) { const e=document.getElementById('errBox'); e.textContent=m; e.classList.add('on'); }
-function hideErr() { document.getElementById('errBox').classList.remove('on'); }
-function resetear() { if(confirm('¿Reiniciar todo?')) { document.getElementById('formSection').style.display='none'; document.getElementById('previewDoc').classList.remove('on'); hideErr(); hideBanner(); applyRates(DEFAULT); } }
+function setLoad(on){document.getElementById('loadingBar').classList.toggle('on',on);document.getElementById('loadingTxt').classList.toggle('on',on);}
+function showErr(m){const e=document.getElementById('errBox');e.textContent=m;e.classList.add('on');}
+function hideErr(){document.getElementById('errBox').classList.remove('on');}
+function resetear(){if(confirm('¿Reiniciar todo?')){document.getElementById('formSection').style.display='none';document.getElementById('previewDoc').classList.remove('on');document.getElementById('recibido').value='';hideErr();hideBanner();applyRates(DEFAULT);}}
 </script>
 </body>
 </html>
